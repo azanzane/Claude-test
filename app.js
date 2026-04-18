@@ -26,7 +26,7 @@ document.querySelectorAll('.back-btn').forEach(btn => {
 });
 
 function initGame(id) {
-  const inits = { bubbles: initBubbles, spinner: initSpinner, tapper: initTapper, doodle: initDoodle, ball: initBall, slider: initSlider, sudoku: initSudoku };
+  const inits = { bubbles: initBubbles, spinner: initSpinner, tapper: initTapper, doodle: initDoodle, ball: initBall, slider: initSlider, sudoku: initSudoku, patches: initPatches, binario: initBinario };
   if (inits[id]) inits[id]();
 }
 
@@ -549,5 +549,239 @@ document.querySelectorAll('.diff-tab').forEach(btn => {
     btn.classList.add('active');
     sudokuDiff = btn.dataset.diff;
     newSudokuGame();
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PATCHES
+// ═══════════════════════════════════════════════════════════════════════════
+const PATCH_COLS = 6;
+const PATCH_ROWS = 10;
+const PATCH_PALETTE = ['#ef4444','#f97316','#eab308','#22c55e','#06b6d4','#3b82f6','#8b5cf6','#ec4899','#f8fafc','#1e293b'];
+let patchColor = PATCH_PALETTE[4];
+let isPatchPainting = false;
+
+function initPatches() {
+  buildPatchPalette();
+  buildPatchGrid();
+}
+
+function buildPatchPalette() {
+  const wrap = document.getElementById('patches-palette');
+  if (wrap.childElementCount > 0) return;
+  PATCH_PALETTE.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'patch-color-btn' + (i === 4 ? ' active' : '');
+    btn.style.background = c;
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.patch-color-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      patchColor = c;
+    });
+    wrap.appendChild(btn);
+  });
+}
+
+function buildPatchGrid() {
+  const grid = document.getElementById('patches-grid');
+  grid.innerHTML = '';
+  for (let i = 0; i < PATCH_COLS * PATCH_ROWS; i++) {
+    const p = document.createElement('div');
+    p.className = 'patch';
+    grid.appendChild(p);
+  }
+
+  grid.addEventListener('touchstart', e => {
+    e.preventDefault();
+    isPatchPainting = true;
+    paintPatchAt(e.touches[0]);
+  }, { passive: false });
+  grid.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (isPatchPainting) paintPatchAt(e.touches[0]);
+  }, { passive: false });
+  grid.addEventListener('touchend', () => { isPatchPainting = false; });
+  grid.addEventListener('mousedown', e => { isPatchPainting = true; paintPatchAt(e); });
+  grid.addEventListener('mousemove', e => { if (isPatchPainting) paintPatchAt(e); });
+  grid.addEventListener('mouseup', () => { isPatchPainting = false; });
+}
+
+function paintPatchAt(e) {
+  const el = document.elementFromPoint(e.clientX, e.clientY);
+  if (el && el.classList.contains('patch') && el.style.background !== patchColor) {
+    el.style.background = patchColor;
+    buzz('light');
+  }
+}
+
+document.getElementById('patches-clear').addEventListener('click', () => {
+  document.querySelectorAll('.patch').forEach(p => { p.style.background = '#e2e8f0'; });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BINARIO
+// ═══════════════════════════════════════════════════════════════════════════
+let binarioSize = 6;
+let binarioPuzzle = [];
+let binarioGiven = [];
+let binarioSolved = false;
+
+function initBinario() {
+  newBinarioGame();
+}
+
+function newBinarioGame() {
+  binarioSolved = false;
+  document.getElementById('binario-status').textContent = '';
+  const solution = generateBinarioSolution(binarioSize);
+  if (!solution) { newBinarioGame(); return; }
+  const { puzzle, given } = createBinarioPuzzle(solution, binarioSize);
+  binarioPuzzle = puzzle;
+  binarioGiven = given;
+  renderBinarioGrid();
+}
+
+function generateBinarioSolution(size) {
+  const board = Array.from({length: size}, () => Array(size).fill(-1));
+  return fillBinarioBoard(board, size, 0) ? board : null;
+}
+
+function fillBinarioBoard(board, size, pos) {
+  if (pos === size * size) return true;
+  const r = Math.floor(pos / size), c = pos % size;
+  for (const v of (Math.random() < 0.5 ? [0, 1] : [1, 0])) {
+    board[r][c] = v;
+    if (binarioCellOk(board, r, c, size)) {
+      if (fillBinarioBoard(board, size, pos + 1)) return true;
+    }
+  }
+  board[r][c] = -1;
+  return false;
+}
+
+function binarioCellOk(board, r, c, size) {
+  const half = size / 2;
+  let rz = 0, ro = 0;
+  for (let i = 0; i <= c; i++) { if (board[r][i] === 0) rz++; else if (board[r][i] === 1) ro++; }
+  if (rz > half || ro > half) return false;
+  if (c >= 2 && board[r][c] === board[r][c-1] && board[r][c] === board[r][c-2]) return false;
+  let cz = 0, co = 0;
+  for (let i = 0; i <= r; i++) { if (board[i][c] === 0) cz++; else if (board[i][c] === 1) co++; }
+  if (cz > half || co > half) return false;
+  if (r >= 2 && board[r][c] === board[r-1][c] && board[r][c] === board[r-2][c]) return false;
+  if (c === size - 1) {
+    const rStr = board[r].join('');
+    for (let pr = 0; pr < r; pr++) if (board[pr].join('') === rStr) return false;
+  }
+  if (r === size - 1) {
+    const cStr = board.map(row => row[c]).join('');
+    for (let pc = 0; pc < c; pc++) if (board.map(row => row[pc]).join('') === cStr) return false;
+  }
+  return true;
+}
+
+function createBinarioPuzzle(solution, size) {
+  const puzzle = solution.map(r => [...r]);
+  const given = solution.map(r => r.map(() => true));
+  const removes = { 6: 20, 8: 36, 10: 55 }[size] || 20;
+  let count = 0;
+  for (const pos of shuffleArr([...Array(size * size).keys()])) {
+    if (count >= removes) break;
+    puzzle[Math.floor(pos / size)][pos % size] = -1;
+    given[Math.floor(pos / size)][pos % size] = false;
+    count++;
+  }
+  return { puzzle, given };
+}
+
+function renderBinarioGrid() {
+  const grid = document.getElementById('binario-grid');
+  const cellSize = Math.min(
+    Math.floor((window.innerWidth - 32) / binarioSize),
+    Math.floor((window.innerHeight - 250) / binarioSize)
+  );
+  grid.style.cssText = `grid-template-columns:repeat(${binarioSize},${cellSize}px);grid-template-rows:repeat(${binarioSize},${cellSize}px);width:${cellSize*binarioSize}px`;
+  grid.innerHTML = '';
+  for (let r = 0; r < binarioSize; r++) {
+    for (let c = 0; c < binarioSize; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'b-cell';
+      cell.dataset.r = r; cell.dataset.c = c;
+      cell.style.fontSize = `${Math.round(cellSize * 0.52)}px`;
+      const val = binarioPuzzle[r][c];
+      if (val !== -1) { cell.dataset.val = val; cell.textContent = '●'; }
+      if (binarioGiven[r][c]) cell.classList.add('given');
+      else cell.addEventListener('click', () => toggleBinarioCell(r, c));
+      grid.appendChild(cell);
+    }
+  }
+  updateBinarioErrors();
+}
+
+function toggleBinarioCell(r, c) {
+  if (binarioSolved) return;
+  const cur = binarioPuzzle[r][c];
+  binarioPuzzle[r][c] = cur === -1 ? 0 : cur === 0 ? 1 : -1;
+  const cell = document.querySelector(`.b-cell[data-r="${r}"][data-c="${c}"]`);
+  const val = binarioPuzzle[r][c];
+  if (val === -1) { delete cell.dataset.val; cell.textContent = ''; }
+  else { cell.dataset.val = val; cell.textContent = '●'; }
+  buzz('light');
+  updateBinarioErrors();
+  checkBinarioWin();
+}
+
+function getBinarioErrors() {
+  const errors = new Set();
+  const b = binarioPuzzle, size = binarioSize, half = size / 2;
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      if (b[r][c] === -1) continue;
+      if (c >= 2 && b[r][c] === b[r][c-1] && b[r][c] === b[r][c-2]) [c-2,c-1,c].forEach(i => errors.add(`${r},${i}`));
+      if (r >= 2 && b[r][c] === b[r-1][c] && b[r][c] === b[r-2][c]) [r-2,r-1,r].forEach(i => errors.add(`${i},${c}`));
+    }
+    const rz = b[r].filter(v=>v===0).length, ro = b[r].filter(v=>v===1).length;
+    if (rz > half || ro > half) for (let c = 0; c < size; c++) errors.add(`${r},${c}`);
+  }
+  for (let c = 0; c < size; c++) {
+    const col = b.map(row => row[c]);
+    const cz = col.filter(v=>v===0).length, co = col.filter(v=>v===1).length;
+    if (cz > half || co > half) for (let r = 0; r < size; r++) errors.add(`${r},${c}`);
+  }
+  return errors;
+}
+
+function updateBinarioErrors() {
+  const errors = getBinarioErrors();
+  document.querySelectorAll('.b-cell').forEach(cell => {
+    cell.classList.toggle('b-error', errors.has(`${cell.dataset.r},${cell.dataset.c}`));
+  });
+}
+
+function checkBinarioWin() {
+  const b = binarioPuzzle, size = binarioSize;
+  if (b.some(row => row.includes(-1))) return;
+  if (getBinarioErrors().size > 0) return;
+  for (let r = 0; r < size; r++)
+    for (let r2 = r+1; r2 < size; r2++)
+      if (b[r].join('') === b[r2].join('')) return;
+  for (let c = 0; c < size; c++) {
+    const col = b.map(row => row[c]).join('');
+    for (let c2 = c+1; c2 < size; c2++)
+      if (col === b.map(row => row[c2]).join('')) return;
+  }
+  binarioSolved = true;
+  buzz('heavy');
+  document.getElementById('binario-status').textContent = '🎉 Solved!';
+}
+
+document.getElementById('binario-new').addEventListener('click', newBinarioGame);
+
+document.querySelectorAll('.size-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.size-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    binarioSize = parseInt(btn.dataset.size);
+    newBinarioGame();
   });
 });

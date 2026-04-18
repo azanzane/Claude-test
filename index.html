@@ -45,6 +45,14 @@
       <div class="card-media"><span class="icon">🔢</span></div>
       <div class="card-body"><span class="card-tag">Puzzle</span><span class="name">Sudoku</span></div>
     </button>
+    <button class="game-card" data-game="patches" style="--c1:#fde68a;--c2:#f59e0b">
+      <div class="card-media"><span class="icon">🎨</span></div>
+      <div class="card-body"><span class="card-tag">Creative</span><span class="name">Patches</span></div>
+    </button>
+    <button class="game-card" data-game="binario" style="--c1:#bae6fd;--c2:#0d2341">
+      <div class="card-media"><span class="icon">⚫</span></div>
+      <div class="card-body"><span class="card-tag">Puzzle</span><span class="name">Binario</span></div>
+    </button>
   </div>
 </div>
 
@@ -152,6 +160,33 @@
   <div id="sudoku-grid"></div>
   <div id="sudoku-numpad"></div>
   <div id="sudoku-status"></div>
+</div>
+
+<!-- PATCHES -->
+<div id="screen-patches" class="screen game-screen">
+  <div class="game-header">
+    <button class="back-btn">← Back</button>
+    <h2>Patches</h2>
+    <button id="patches-clear" class="action-btn">Clear</button>
+  </div>
+  <div class="patches-palette" id="patches-palette"></div>
+  <div id="patches-grid"></div>
+</div>
+
+<!-- BINARIO -->
+<div id="screen-binario" class="screen game-screen">
+  <div class="game-header">
+    <button class="back-btn">← Back</button>
+    <h2>Binario</h2>
+    <button id="binario-new" class="action-btn">New</button>
+  </div>
+  <div class="binario-size-tabs">
+    <button class="size-tab active" data-size="6">6×6</button>
+    <button class="size-tab" data-size="8">8×8</button>
+    <button class="size-tab" data-size="10">10×10</button>
+  </div>
+  <div id="binario-grid"></div>
+  <div id="binario-status"></div>
 </div>
 
 <script src="app.js"></script>
