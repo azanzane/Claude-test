@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Fidget Zone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HOME SCREEN -->
+<div id="screen-home" class="screen active">
+  <header>
+    <h1>Fidget Zone</h1>
+    <p class="subtitle">Pick something to fidget with</p>
+  </header>
+  <div class="game-grid">
+    <button class="game-card" data-game="bubbles" style="--c1:#6ee7f7;--c2:#3b82f6">
+      <span class="icon">🫧</span>
+      <span class="name">Bubble Wrap</span>
+    </button>
+    <button class="game-card" data-game="spinner" style="--c1:#fda4af;--c2:#e11d48">
+      <span class="icon">🌀</span>
+      <span class="name">Spinner</span>
+    </button>
+    <button class="game-card" data-game="tapper" style="--c1:#86efac;--c2:#16a34a">
+      <span class="icon">👆</span>
+      <span class="name">Tap Counter</span>
+    </button>
+    <button class="game-card" data-game="doodle" style="--c1:#fcd34d;--c2:#d97706">
+      <span class="icon">✏️</span>
+      <span class="name">Zen Doodle</span>
+    </button>
+    <button class="game-card" data-game="ball" style="--c1:#c4b5fd;--c2:#7c3aed">
+      <span class="icon">🔴</span>
+      <span class="name">Stress Ball</span>
+    </button>
+    <button class="game-card" data-game="slider" style="--c1:#fdba74;--c2:#ea580c">
+      <span class="icon">🎚️</span>
+      <span class="name">Sliders</span>
+    </button>
+  </div>
+</div>
+
+<!-- BUBBLE WRAP -->
+<div id="screen-bubbles" class="screen game-screen">
+  <div class="game-header">
+    <button class="back-btn">← Back</button>
+    <h2>Bubble Wrap</h2>
+    <button id="bubbles-reset" class="action-btn">Refill</button>
+  </div>
+  <div id="bubble-grid"></div>
+  <div class="score-bar">Popped: <span id="bubble-count">0</span></div>
+</div>
+
+<!-- SPINNER -->
+<div id="screen-spinner" class="screen game-screen">
+  <div class="game-header">
+    <button class="back-btn">← Back</button>
+    <h2>Spinner</h2>
+    <div></div>
+  </div>
+  <div class="spinner-arena">
+    <div id="spinner-disc">
+      <div class="spinner-arm"></div>
+      <div class="spinner-arm"></div>
+      <div class="spinner-arm"></div>
+      <div class="center-dot"></div>
+    </div>
+    <p class="hint">Flick to spin!</p>
+  </div>
+  <div class="score-bar">RPM: <span id="spinner-rpm">0</span></div>
+</div>
+
+<!-- TAP COUNTER -->
+<div id="screen-tapper" class="screen game-screen">
+  <div class="game-header">
+    <button class="back-btn">← Back</button>
+    <h2>Tap Counter</h2>
+    <button id="tapper-reset" class="action-btn">Reset</button>
+  </div>
+  <div class="tapper-arena">
+    <div id="tap-area">
+      <div id="tap-number">0</div>
+      <div id="tap-label">TAP ME</div>
+    </div>
+    <div id="tap-ripple-container"></div>
+  </div>
+  <div class="score-bar">Best: <span id="tapper-best">0</span></div>
+</div>
+
+<!-- ZEN DOODLE -->
+<div id="screen-doodle" class="screen game-screen">
+  <div class="game-header">
+    <button class="back-btn">← Back</button>
+    <h2>Zen Doodle</h2>
+    <button id="doodle-clear" class="action-btn">Clear</button>
+  </div>
+  <div class="doodle-tools">
+    <div class="color-swatches" id="color-swatches"></div>
+    <div class="size-slider-wrap">
+      <input type="range" id="brush-size" min="2" max="40" value="10">
+    </div>
+  </div>
+  <canvas id="doodle-canvas"></canvas>
+</div>
+
+<!-- STRESS BALL -->
+<div id="screen-ball" class="screen game-screen">
+  <div class="game-header">
+    <button class="back-btn">← Back</button>
+    <h2>Stress Ball</h2>
+    <div></div>
+  </div>
+  <div class="ball-arena">
+    <div id="stress-ball">
+      <div class="ball-shine"></div>
+    </div>
+    <p class="hint">Squeeze me!</p>
+  </div>
+  <div class="score-bar">Squeezes: <span id="ball-count">0</span></div>
+</div>
+
+<!-- SLIDERS -->
+<div id="screen-slider" class="screen game-screen">
+  <div class="game-header">
+    <button class="back-btn">← Back</button>
+    <h2>Sliders</h2>
+    <button id="slider-randomize" class="action-btn">Shuffle</button>
+  </div>
+  <div class="slider-arena" id="slider-arena"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
