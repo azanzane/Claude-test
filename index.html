@@ -41,6 +41,10 @@
       <span class="icon">🎚️</span>
       <span class="name">Sliders</span>
     </button>
+    <button class="game-card" data-game="sudoku" style="--c1:#6ee7b7;--c2:#0f766e">
+      <span class="icon">🔢</span>
+      <span class="name">Sudoku</span>
+    </button>
   </div>
 </div>
 
@@ -131,6 +135,23 @@
     <button id="slider-randomize" class="action-btn">Shuffle</button>
   </div>
   <div class="slider-arena" id="slider-arena"></div>
+</div>
+
+<!-- SUDOKU -->
+<div id="screen-sudoku" class="screen game-screen">
+  <div class="game-header">
+    <button class="back-btn">← Back</button>
+    <h2>Sudoku</h2>
+    <button id="sudoku-new" class="action-btn">New</button>
+  </div>
+  <div class="sudoku-diff-tabs">
+    <button class="diff-tab active" data-diff="easy">Easy</button>
+    <button class="diff-tab" data-diff="medium">Medium</button>
+    <button class="diff-tab" data-diff="hard">Hard</button>
+  </div>
+  <div id="sudoku-grid"></div>
+  <div id="sudoku-numpad"></div>
+  <div id="sudoku-status"></div>
 </div>
 
 <script src="app.js"></script>

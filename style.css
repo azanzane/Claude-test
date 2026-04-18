@@ -345,6 +345,101 @@ html, body {
 }
 .fancy-slider:active::-webkit-slider-thumb { cursor: grabbing; transform: scale(1.2); }
 
+/* ── SUDOKU ── */
+.sudoku-diff-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px 10px;
+  background: var(--bg);
+}
+.diff-tab {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 10px;
+  background: var(--surface2);
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.diff-tab.active { background: #0f766e; color: #fff; }
+
+#sudoku-grid {
+  --cell: min(calc((100vw - 24px) / 9), calc((100vh - 280px) / 9));
+  display: grid;
+  grid-template-columns: repeat(9, var(--cell));
+  grid-template-rows: repeat(9, var(--cell));
+  border: 2px solid #4b5563;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0 auto;
+  width: calc(var(--cell) * 9);
+  flex-shrink: 0;
+}
+.sudoku-cell {
+  width: var(--cell);
+  height: var(--cell);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--cell) * 0.45);
+  font-weight: 600;
+  color: var(--text);
+  border: 0.5px solid #374151;
+  cursor: pointer;
+  transition: background 0.1s;
+  background: var(--surface);
+}
+.sudoku-cell.box-left  { border-left:  2px solid #6b7280; }
+.sudoku-cell.box-top   { border-top:   2px solid #6b7280; }
+.sudoku-cell.given     { color: #6ee7b7; font-weight: 800; }
+.sudoku-cell.selected  { background: #134e4a !important; }
+.sudoku-cell.related   { background: #1f2937; }
+.sudoku-cell.same-num  { background: #1a3a38; }
+.sudoku-cell.error     { color: #f87171 !important; }
+.sudoku-cell.win       { color: #6ee7b7; }
+.sudoku-cell.shake     { animation: shake 0.3s ease; }
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25%      { transform: translateX(-4px); }
+  75%      { transform: translateX(4px); }
+}
+
+#sudoku-numpad {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px 4px;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.numpad-btn {
+  flex: 1;
+  max-width: 52px;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 10px;
+  background: var(--surface2);
+  color: var(--text);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.1s, transform 0.08s;
+}
+.numpad-btn:active { background: #0f766e; transform: scale(0.9); }
+.erase-btn { color: #f87171; }
+
+#sudoku-status {
+  text-align: center;
+  padding: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #6ee7b7;
+  min-height: 32px;
+  flex-shrink: 0;
+}
+
 /* Transition between screens */
 .screen { animation: none; }
 .screen.entering {
