@@ -59,18 +59,21 @@
 <!-- BUBBLE WRAP -->
 <div id="screen-bubbles" class="screen game-screen">
   <div class="game-header">
-    <button class="back-btn">← Back</button>
+    <button class="back-btn">‹ Back</button>
     <h2>Bubble Wrap</h2>
     <button id="bubbles-reset" class="action-btn">Refill</button>
   </div>
   <div id="bubble-grid"></div>
-  <div class="score-bar">Popped: <span id="bubble-count">0</span></div>
+  <div class="score-bar">
+    <span class="s-stat">Popped: <span id="bubble-count">0</span></span>
+    <span class="s-timer">⏱ <span id="bubbles-timer">00:00</span></span>
+  </div>
 </div>
 
 <!-- SPINNER -->
 <div id="screen-spinner" class="screen game-screen">
   <div class="game-header">
-    <button class="back-btn">← Back</button>
+    <button class="back-btn">‹ Back</button>
     <h2>Spinner</h2>
     <div></div>
   </div>
@@ -83,13 +86,16 @@
     </div>
     <p class="hint">Flick to spin!</p>
   </div>
-  <div class="score-bar">RPM: <span id="spinner-rpm">0</span></div>
+  <div class="score-bar">
+    <span class="s-stat">RPM: <span id="spinner-rpm">0</span></span>
+    <span class="s-timer">⏱ <span id="spinner-timer">00:00</span></span>
+  </div>
 </div>
 
 <!-- TAP COUNTER -->
 <div id="screen-tapper" class="screen game-screen">
   <div class="game-header">
-    <button class="back-btn">← Back</button>
+    <button class="back-btn">‹ Back</button>
     <h2>Tap Counter</h2>
     <button id="tapper-reset" class="action-btn">Reset</button>
   </div>
@@ -100,13 +106,16 @@
     </div>
     <div id="tap-ripple-container"></div>
   </div>
-  <div class="score-bar">Best: <span id="tapper-best">0</span></div>
+  <div class="score-bar">
+    <span class="s-stat">Best: <span id="tapper-best">0</span></span>
+    <span class="s-timer">⏱ <span id="tapper-timer">00:00</span></span>
+  </div>
 </div>
 
 <!-- ZEN DOODLE -->
 <div id="screen-doodle" class="screen game-screen">
   <div class="game-header">
-    <button class="back-btn">← Back</button>
+    <button class="back-btn">‹ Back</button>
     <h2>Zen Doodle</h2>
     <button id="doodle-clear" class="action-btn">Clear</button>
   </div>
@@ -117,12 +126,16 @@
     </div>
   </div>
   <canvas id="doodle-canvas"></canvas>
+  <div class="score-bar">
+    <span class="s-stat">Session</span>
+    <span class="s-timer">⏱ <span id="doodle-timer">00:00</span></span>
+  </div>
 </div>
 
 <!-- STRESS BALL -->
 <div id="screen-ball" class="screen game-screen">
   <div class="game-header">
-    <button class="back-btn">← Back</button>
+    <button class="back-btn">‹ Back</button>
     <h2>Stress Ball</h2>
     <div></div>
   </div>
@@ -132,23 +145,30 @@
     </div>
     <p class="hint">Squeeze me!</p>
   </div>
-  <div class="score-bar">Squeezes: <span id="ball-count">0</span></div>
+  <div class="score-bar">
+    <span class="s-stat">Squeezes: <span id="ball-count">0</span></span>
+    <span class="s-timer">⏱ <span id="ball-timer">00:00</span></span>
+  </div>
 </div>
 
 <!-- SLIDERS -->
 <div id="screen-slider" class="screen game-screen">
   <div class="game-header">
-    <button class="back-btn">← Back</button>
+    <button class="back-btn">‹ Back</button>
     <h2>Sliders</h2>
     <button id="slider-randomize" class="action-btn">Shuffle</button>
   </div>
   <div class="slider-arena" id="slider-arena"></div>
+  <div class="score-bar">
+    <span class="s-stat">Session</span>
+    <span class="s-timer">⏱ <span id="slider-timer">00:00</span></span>
+  </div>
 </div>
 
 <!-- SUDOKU -->
 <div id="screen-sudoku" class="screen game-screen">
   <div class="game-header">
-    <button class="back-btn">← Back</button>
+    <button class="back-btn">‹ Back</button>
     <h2>Sudoku</h2>
     <button id="sudoku-new" class="action-btn">New</button>
   </div>
@@ -157,26 +177,37 @@
     <button class="diff-tab" data-diff="medium">Medium</button>
     <button class="diff-tab" data-diff="hard">Hard</button>
   </div>
+  <div id="sudoku-mini-wrap"><div id="sudoku-mini"></div></div>
   <div id="sudoku-grid"></div>
   <div id="sudoku-numpad"></div>
   <div id="sudoku-status"></div>
+  <div class="score-bar">
+    <span class="s-stat">Puzzle</span>
+    <span class="s-timer">⏱ <span id="sudoku-timer">00:00</span></span>
+  </div>
 </div>
 
 <!-- PATCHES -->
 <div id="screen-patches" class="screen game-screen">
   <div class="game-header">
-    <button class="back-btn">← Back</button>
+    <button class="back-btn">‹ Back</button>
     <h2>Patches</h2>
-    <button id="patches-clear" class="action-btn">Clear</button>
+    <button id="patches-new" class="action-btn">New</button>
   </div>
-  <div class="patches-palette" id="patches-palette"></div>
-  <div id="patches-grid"></div>
+  <div id="patches-grid-wrap">
+    <div id="patches-grid"></div>
+  </div>
+  <div id="patches-status"></div>
+  <div class="score-bar">
+    <span class="s-stat">Placed: <span id="patches-count">0</span></span>
+    <span class="s-timer">⏱ <span id="patches-timer">00:00</span></span>
+  </div>
 </div>
 
 <!-- BINARIO -->
 <div id="screen-binario" class="screen game-screen">
   <div class="game-header">
-    <button class="back-btn">← Back</button>
+    <button class="back-btn">‹ Back</button>
     <h2>Binario</h2>
     <button id="binario-new" class="action-btn">New</button>
   </div>
@@ -187,6 +218,10 @@
   </div>
   <div id="binario-grid"></div>
   <div id="binario-status"></div>
+  <div class="score-bar">
+    <span class="s-stat">Puzzle</span>
+    <span class="s-timer">⏱ <span id="binario-timer">00:00</span></span>
+  </div>
 </div>
 
 <script src="app.js"></script>
