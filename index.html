@@ -10,78 +10,160 @@
 </head>
 <body>
 
-<!-- HOME SCREEN -->
-<div id="screen-home" class="screen active home-screen">
-  <section class="hero">
-    <h1>Fidget <span>Zone</span></h1>
-    <p class="hero-subtitle">Relax, focus, or play. Find your fidget.</p>
-  </section>
-
-  <section class="category-section">
-    <div class="section-header">
-      <h2>Fidget & Relax</h2>
-      <p class="section-desc">Soothing, tactile experiences.</p>
+<!-- HOME SCREEN - LANDING PAGE -->
+<div id="screen-home" class="screen active landing-page">
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Fidget <span>Zone</span></h1>
+      <p class="hero-tagline">Relax. Focus. Play.</p>
+      <p class="hero-desc">Discover a collection of fidget games designed to help you unwind, challenge your mind, and express your creativity.</p>
+      <button class="hero-cta" onclick="document.querySelector('.games-list-section').scrollIntoView({behavior: 'smooth'})">Explore Games</button>
     </div>
-    <div class="game-grid">
-      <button class="game-card" data-game="bubbles" style="--c1:#6ee7f7;--c2:#3b82f6">
-        <div class="card-media"><span class="icon">🫧</span></div>
-        <div class="card-body"><span class="card-tag">Fidget</span><span class="name">Bubble Wrap</span></div>
-      </button>
-      <button class="game-card" data-game="spinner" style="--c1:#fda4af;--c2:#e11d48">
-        <div class="card-media"><span class="icon">🌀</span></div>
-        <div class="card-body"><span class="card-tag">Fidget</span><span class="name">Spinner</span></div>
-      </button>
-      <button class="game-card" data-game="ball" style="--c1:#fda4af;--c2:#be185d">
-        <div class="card-media"><span class="icon">🔴</span></div>
-        <div class="card-body"><span class="card-tag">Fidget</span><span class="name">Stress Ball</span></div>
-      </button>
+    <div class="hero-visual">
+      <div class="hero-icon">🎮</div>
     </div>
   </section>
 
-  <section class="category-section alt">
-    <div class="section-header">
-      <h2>Challenge Your Mind</h2>
-      <p class="section-desc">Logic puzzles to test your skills.</p>
-    </div>
-    <div class="game-grid">
-      <button class="game-card" data-game="sudoku" style="--c1:#6ee7b7;--c2:#0f766e">
-        <div class="card-media"><span class="icon">🔢</span></div>
-        <div class="card-body"><span class="card-tag">Puzzle</span><span class="name">Sudoku</span></div>
-      </button>
-      <button class="game-card" data-game="patches" style="--c1:#fde68a;--c2:#f59e0b">
-        <div class="card-media"><span class="icon">🎨</span></div>
-        <div class="card-body"><span class="card-tag">Puzzle</span><span class="name">Patches</span></div>
-      </button>
-      <button class="game-card" data-game="binario" style="--c1:#bae6fd;--c2:#0d2341">
-        <div class="card-media"><span class="icon">⚫</span></div>
-        <div class="card-body"><span class="card-tag">Puzzle</span><span class="name">Binario</span></div>
-      </button>
+  <!-- GAMES LIST SECTION -->
+  <section class="games-list-section">
+    <h2>Our Games</h2>
+    <p class="section-intro">9 unique experiences to discover</p>
+    <div class="games-quick-list">
+      <div class="quick-item">🫧 Bubble Wrap</div>
+      <div class="quick-item">🌀 Spinner</div>
+      <div class="quick-item">👆 Tap Counter</div>
+      <div class="quick-item">✏️ Zen Doodle</div>
+      <div class="quick-item">🔴 Stress Ball</div>
+      <div class="quick-item">🎚️ Sliders</div>
+      <div class="quick-item">🔢 Sudoku</div>
+      <div class="quick-item">🎨 Patches</div>
+      <div class="quick-item">⚫ Binario</div>
     </div>
   </section>
 
-  <section class="category-section">
-    <div class="section-header">
-      <h2>Create & Express</h2>
-      <p class="section-desc">Let your creativity flow.</p>
+  <!-- INDIVIDUAL GAME SHOWCASES -->
+  <!-- BUBBLE WRAP -->
+  <section class="game-showcase">
+    <div class="showcase-visual" style="background: linear-gradient(135deg, #6ee7f7, #3b82f6);">
+      <div class="showcase-icon">🫧</div>
     </div>
-    <div class="game-grid">
-      <button class="game-card" data-game="doodle" style="--c1:#fcd34d;--c2:#d97706">
-        <div class="card-media"><span class="icon">✏️</span></div>
-        <div class="card-body"><span class="card-tag">Creative</span><span class="name">Zen Doodle</span></div>
-      </button>
-      <button class="game-card" data-game="tapper" style="--c1:#86efac;--c2:#16a34a">
-        <div class="card-media"><span class="icon">👆</span></div>
-        <div class="card-body"><span class="card-tag">Reflex</span><span class="name">Tap Counter</span></div>
-      </button>
-      <button class="game-card" data-game="slider" style="--c1:#fdba74;--c2:#ea580c">
-        <div class="card-media"><span class="icon">🎚️</span></div>
-        <div class="card-body"><span class="card-tag">Chill</span><span class="name">Sliders</span></div>
-      </button>
+    <div class="showcase-content">
+      <span class="game-tag">Fidget</span>
+      <h3>Bubble Wrap</h3>
+      <p>Pop virtual bubbles for a satisfying, stress-relieving experience. Watch your popping count grow as you find your rhythm.</p>
+      <button class="play-btn" onclick="showScreen('bubbles')">Play Now</button>
     </div>
   </section>
 
-  <section class="footer-section">
-    <p>Crafted for focus and relaxation on mobile.</p>
+  <!-- SPINNER -->
+  <section class="game-showcase alt">
+    <div class="showcase-visual" style="background: linear-gradient(135deg, #fda4af, #e11d48);">
+      <div class="showcase-icon">🌀</div>
+    </div>
+    <div class="showcase-content">
+      <span class="game-tag">Fidget</span>
+      <h3>Spinner</h3>
+      <p>Flick the spinner and watch it spin. Chase high RPM records and feel the physics-based satisfaction of angular momentum.</p>
+      <button class="play-btn" onclick="showScreen('spinner')">Play Now</button>
+    </div>
+  </section>
+
+  <!-- TAP COUNTER -->
+  <section class="game-showcase">
+    <div class="showcase-visual" style="background: linear-gradient(135deg, #86efac, #16a34a);">
+      <div class="showcase-icon">👆</div>
+    </div>
+    <div class="showcase-content">
+      <span class="game-tag">Reflex</span>
+      <h3>Tap Counter</h3>
+      <p>Test your tapping speed. Beat your personal best and challenge yourself to reach higher scores with every session.</p>
+      <button class="play-btn" onclick="showScreen('tapper')">Play Now</button>
+    </div>
+  </section>
+
+  <!-- ZEN DOODLE -->
+  <section class="game-showcase alt">
+    <div class="showcase-visual" style="background: linear-gradient(135deg, #fcd34d, #d97706);">
+      <div class="showcase-icon">✏️</div>
+    </div>
+    <div class="showcase-content">
+      <span class="game-tag">Creative</span>
+      <h3>Zen Doodle</h3>
+      <p>Express yourself with colors and brushes. Draw freely on a dark canvas and discover the meditative joy of creation.</p>
+      <button class="play-btn" onclick="showScreen('doodle')">Play Now</button>
+    </div>
+  </section>
+
+  <!-- STRESS BALL -->
+  <section class="game-showcase">
+    <div class="showcase-visual" style="background: linear-gradient(135deg, #fda4af, #be185d);">
+      <div class="showcase-icon">🔴</div>
+    </div>
+    <div class="showcase-content">
+      <span class="game-tag">Fidget</span>
+      <h3>Stress Ball</h3>
+      <p>Squeeze away tension with a digital stress ball. Watch it react with satisfying visual feedback to your grip.</p>
+      <button class="play-btn" onclick="showScreen('ball')">Play Now</button>
+    </div>
+  </section>
+
+  <!-- SLIDERS -->
+  <section class="game-showcase alt">
+    <div class="showcase-visual" style="background: linear-gradient(135deg, #fdba74, #ea580c);">
+      <div class="showcase-icon">🎚️</div>
+    </div>
+    <div class="showcase-content">
+      <span class="game-tag">Chill</span>
+      <h3>Sliders</h3>
+      <p>Adjust five dynamic sliders. A simple yet endlessly engaging way to pass the time and find balance.</p>
+      <button class="play-btn" onclick="showScreen('slider')">Play Now</button>
+    </div>
+  </section>
+
+  <!-- SUDOKU -->
+  <section class="game-showcase">
+    <div class="showcase-visual" style="background: linear-gradient(135deg, #6ee7b7, #0f766e);">
+      <div class="showcase-icon">🔢</div>
+    </div>
+    <div class="showcase-content">
+      <span class="game-tag">Puzzle</span>
+      <h3>Sudoku</h3>
+      <p>Classic number puzzle with three difficulty levels. Challenge your logic and solve grids from Easy to Hard.</p>
+      <button class="play-btn" onclick="showScreen('sudoku')">Play Now</button>
+    </div>
+  </section>
+
+  <!-- PATCHES -->
+  <section class="game-showcase alt">
+    <div class="showcase-visual" style="background: linear-gradient(135deg, #fde68a, #f59e0b);">
+      <div class="showcase-icon">🎨</div>
+    </div>
+    <div class="showcase-content">
+      <span class="game-tag">Puzzle</span>
+      <h3>Patches</h3>
+      <p>Fill the grid with rectangular patches. Match shapes and sizes to complete the puzzle in this spatial challenge.</p>
+      <button class="play-btn" onclick="showScreen('patches')">Play Now</button>
+    </div>
+  </section>
+
+  <!-- BINARIO -->
+  <section class="game-showcase">
+    <div class="showcase-visual" style="background: linear-gradient(135deg, #bae6fd, #0d2341);">
+      <div class="showcase-icon">⚫</div>
+    </div>
+    <div class="showcase-content">
+      <span class="game-tag">Puzzle</span>
+      <h3>Binario</h3>
+      <p>A binary puzzle game. Balance blue and green tiles following logical rules to complete each board.</p>
+      <button class="play-btn" onclick="showScreen('binario')">Play Now</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <section class="landing-footer">
+    <p>Designed for focus, relaxation, and fun on mobile.</p>
+    <p class="footer-year">© 2025 Fidget Zone</p>
   </section>
 </div>
 
